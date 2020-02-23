@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ckeditor',
     'product',
     'blog',
 ]
@@ -134,6 +135,12 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+# Mommy configs
+MOMMY_CUSTOM_FIELDS_GEN = {
+    'autoslug.fields.AutoSlugField': lambda: "Default test text",
+    'ckeditor.fields.RichTextField': lambda: "Default test text"
+}
 
 # Heroku config
 django_heroku.settings(locals())
