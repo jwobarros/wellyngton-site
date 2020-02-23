@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load product_extras %}
+
+{% block content %}
+
+<div style="background-image: url('{% static 'img/accomplishment-action-adult-adventure-372098.jpg' %}');" class="container-fluid bg_full_height">
+    <div class="centered">Centered</div>
+</div>
+
+<!-- Carousels -->
+
+{% for category in categories %}
+
+
+{% if category.products_pagination.count > 0 %}
+  
+<div id="{{category.title}}" class="container-fluid my-5">
+
+  <h1 class="text-center">{{category.title}}</h1>
+  <h5 class="text-center text-secondary">{{category.summary}}</h5>
+
+  <div id="carousel{{category.category_id}}" class="carousel carousel-fade" data-ride="carousel">
+    <div class="carousel-inner">
+      {% for page_number in category.products_pagination.page_range %}
+
+      <div class="carousel-item row d-flex justify-content-center 
+      {% if page_number == 1 %}
+        active
+      {% endif %}
+         ">
+        <div class="d-flex justify-content-center">
+          <div class="row d-flex justify-content-center col-12">
+
+            {% for page_object in category.products_pagination|get_objects_page:page_number %}
+            <div class="col-sm-12 col-md-4 d-flex flex-fill">
+              <div class="card" style="width: 18rem;">
+                <img src="{% static 'img/accomplishment-action-adult-adventure-372098.jpg' %}" class="card-img-top" alt="...">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">{{page_object.title}}</h5>
+                  <p class="card-text">{{page_object.summary}}</p>
+                </div>
+                <div class="card-footer text-center bg-white border-0">
+                  <p class="card-text text-center"><b>R$ {{page_object.price|floatformat:2}}</b></p>
+                  <a href="{{page_object.link}}" class="btn btn-primary">Comprar</a>
+                </div>
+              </div>
+            </div>  
+            {% endfor %}
+
+          </div>
+        </div>
+      </div>
+  
+      {% endfor %}
+      
+    <a class="carousel-control-prev bg-dark rounded-pill my-auto" style="max-width: 50px; max-height: 50px;" href="#carousel{{category.category_id}}" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+
+    <a class="carousel-control-next bg-dark rounded-pill my-auto" style="max-width: 50px; max-height: 50px;" href="#carousel{{category.category_id}}" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+    </div>
+  </div>
+  
+</div>
+
+{% endif %}
+
+{% endfor %}
+
+
+<!-- End -->
+
+<div class="jumbotron mb-0">
+  <h2>Sobre</h2>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc maximus, nulla ut commodo sagittis, sapien dui mattis dui, non pulvinar lorem felis nec erat.</p>
+</div>
+
+{% endblock content %}
+
+
+{% block dropdown %}
+  
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Produtos
+  </a>
+  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+    {% for category in categories %}
+    <a class="dropdown-item" href="#{{category.title}}">{{category.title}}</a>
+    {% endfor %}
+  </div>
+</li>
+
+{% endblock dropdown %}
+
+
+{% block js %}
+
+<script type="text/javascript">
+
+
+
+</script>
+    
+{% endblock js %}
+    
