@@ -1,6 +1,12 @@
 body, html {
     height: 100%;
-    }
+  }
+
+.fontAwesome {
+  font-family: 'Helvetica', FontAwesome, sans-serif;
+}
+input[id="search_title"]::placeholder { text-align: right; font-family: Roboto, 'Font Awesome\ 5 Pro', sans-serif; font-weight: 600; }
+  
 
 .bg_full_height {
 
@@ -14,14 +20,38 @@ body, html {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    }
+  }
 
 .centered {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
-      
+  }
+
+
+
+.parallax {
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+@media (min-width: 1000px) {
+  .parallax {
+    /* The image used */
+
+    /* Set a specific height */
+    height: 500px;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    }
+  }
+
 
 

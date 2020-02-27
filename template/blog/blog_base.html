@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+
+{% block nav %}
+<nav style="height: 50px;" class="navbar bg-success navbar-expand-lg navbar-light">
+    <a class="navbar-brand text-light" href="{% url 'home' %}">Nome do Site</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div style="z-index: 1;" class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link text-light" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+        </li>
+        
+        {% block dropdown %}
+          
+        {% endblock dropdown %}
+          
+        <li class="nav-item">
+          <a class="nav-link text-light" href="#" data-toggle="modal" data-target="#subscribeModal">Subscrever</a>
+        </li>
+        <li class="nav-item d-sm-block d-md-none">
+          <a class="nav-link text-light" href="{% url 'blog_home' %}">Blog</a>
+        </li>   
+      </ul>
+    </div>
+    <div class="search_form form-inline my-2 my-lg-0">
+        <input id="search_title" type="text" name="search" value="{{ request.GET.search }}" class="form-control rounded-pill mr-sm-2 fontAwesome search" placeholder="&#xF002">
+    </div>
+</nav>
+{% endblock nav %}
+
+
+{% block js %}
+
+<script type="text/javascript">
+
+    var base_url = "{% url 'blog_home' %}"
+
+    function searchByTitle() {
+      window.location.href = base_url + "?search=" + document.getElementById('search_title').value;
+    }
+
+    $('#search_title').keyup(function(e) {
+        if (e.which == 13) {
+          searchByTitle()
+        }
+    });
+
+</script>
+
+{% endblock js %}
+    
