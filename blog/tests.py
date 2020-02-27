@@ -1,6 +1,6 @@
 from django.test import TestCase
 from model_mommy import mommy   
-from blog.models import Post, Tag
+from blog.models import Post, Tag, Subscriber
 # Create your tests here.
 
 class TagTestCase(TestCase):
@@ -22,3 +22,17 @@ class PostTestCase(TestCase):
     def test_post_creation(self):
         """Test post creation"""
         self.assertEqual(self.post.title, 'Django project')
+
+
+class SubscriberTestCase(TestCase):
+    def setUp(self):
+        self.subscriber = mommy.make(Subscriber, email="johnnatan.barros@outlook.com")
+
+    def test_subscription(self):
+        """Test subscription"""
+        self.assertEqual(self.subscriber.active, True)
+
+    def test_unsubscription(self):
+        """Test unsubscription"""
+        self.subscriber.unsubscribe()
+        self.assertEqual(self.subscriber.active, False)

@@ -46,3 +46,24 @@ class Post(models.Model):
     def __str__(self):
         """Unicode representation of Post."""
         return self.title
+
+
+class Subscriber(models.Model):
+    """Model definition for subscriber."""
+
+    email = models.EmailField(verbose_name="E-mail", unique=True)
+    active = models.BooleanField(default=True)
+
+    class Meta:
+        """Meta definition for subscriber."""
+
+        verbose_name = 'Inscrito'
+        verbose_name_plural = 'Inscritos'
+
+    def __str__(self):
+        """Unicode representation of subscriber."""
+        return self.email
+
+    def unsubscribe(self):
+        self.active = False
+        self.save()
